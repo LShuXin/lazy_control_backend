@@ -13,6 +13,7 @@ add_library(${project_name}-lib
         src/controller/auth/LoginController.cpp
         src/controller/auth/LoginController.hpp
         src/dto/auth/AuthDTOs.hpp
+        src/dto/auth/UserDTOs.hpp.cpp
 )
 
 ## link libs
