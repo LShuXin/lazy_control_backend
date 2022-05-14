@@ -1,6 +1,0 @@
-/Users/apple/Desktop/lsx-blog/build/CMakeFiles/rebuild_cache.dir
-/Users/apple/Desktop/lsx-blog/build/CMakeFiles/lsx-blog-exe.dir
-/Users/apple/Desktop/lsx-blog/build/CMakeFiles/edit_cache.dir
-/Users/apple/Desktop/lsx-blog/build/CMakeFiles/test.dir
-/Users/apple/Desktop/lsx-blog/build/CMakeFiles/lsx-blog-test.dir
-/Users/apple/Desktop/lsx-blog/build/CMakeFiles/lsx-blog-lib.dir
