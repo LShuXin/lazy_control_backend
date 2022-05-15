@@ -2,6 +2,7 @@
 #define LoginController_hpp
 
 #include "dto/auth/AuthDTOs.hpp"
+#include "dto/StatusDTOs.hpp"
 
 #include "oatpp/web/server/api/ApiController.hpp"
 #include "oatpp/core/macro/codegen.hpp"
@@ -30,8 +31,8 @@ public:
     ENDPOINT_ASYNC_INIT(Root)
     
     Action act() override {
-      auto dto = LoginResponseDto::createShared();
-      dto->statusCode = 200;
+      auto dto = StatusDto::createShared();
+      dto->code = 200;
       dto->data = "thisistoken";
       dto->message = "ok";
       return _return(controller->createDtoResponse(Status::CODE_200, dto));

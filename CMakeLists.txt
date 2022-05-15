@@ -1,54 +1,87 @@
 cmake_minimum_required(VERSION 3.1)
-
 set(project_name lsx-blog) ## rename your project here
-
 project(${project_name})
 
 set(CMAKE_CXX_STANDARD 11)
 
-include_directories(src)
-
 add_library(${project_name}-lib
-        src/AppComponent.hpp
-        src/controller/auth/LoginController.cpp
         src/controller/auth/LoginController.hpp
+        src/controller/auth/LoginController.cpp
+        src/controller/auth/UserController.hpp
+        src/controller/auth/UserController.cpp
+        src/controller/StaticController.hpp
+        src/db/UserDb.hpp
+        src/dto/PageDTOs.hpp
+        src/dto/StatusDTOs.hpp
         src/dto/auth/AuthDTOs.hpp
-        src/dto/auth/UserDTOs.hpp.cpp
-)
+        src/dto/auth/UserDTOs.hpp
+        src/service/user/UserService.hpp
+        src/service/user/UserService.cpp
+        src/AppComponent.hpp
+        src/DatabaseComponent.hpp
+        src/SwaggerComponent.hpp
+        src/ErrorHandler.hpp
+        src/ErrorHandler.cpp)
+
+## include directories
+
+target_include_directories(${project_name}-lib PUBLIC src)
+
 
 ## link libs
 
-find_package(oatpp 1.3.0 REQUIRED)
+find_package(oatpp          1.3.0 REQUIRED)
+find_package(oatpp-swagger  1.3.0 REQUIRED)
+find_package(oatpp-sqlite   1.3.0 REQUIRED)
 
 target_link_libraries(${project_name}-lib
         PUBLIC oatpp::oatpp
-        PUBLIC oatpp::oatpp-test
+        PUBLIC oatpp::oatpp-swagger
+        PUBLIC oatpp::oatpp-sqlite
 )
+
+# If CMake can't find SQLite3:
+#
+# 1. Make sure that you've built oatpp-sqlite with -DOATPP_SQLITE_AMALGAMATION=ON flag
+# 2. If you are not willing to use SQLite amalgamation then uncomment the following lines:
+#
+#find_package(SQLite3 REQUIRED)
+#
+#target_link_libraries(crud-lib
+#        PUBLIC SQLite::SQLite3
+#)
+
+add_definitions(
+        ## define path to swagger-ui static resources folder
+        -DOATPP_SWAGGER_RES_PATH="${oatpp-swagger_INCLUDE_DIRS}/../bin/oatpp-swagger/res"
+
+        ## SQLite database file
+        -DDATABASE_FILE="${CMAKE_CURRENT_SOURCE_DIR}/db.sqlite"
+        ## SQLite database test file
+        -DTESTDATABASE_FILE="${CMAKE_CURRENT_SOURCE_DIR}/test-db.sqlite"
+
+        ## Path to database migration scripts
+        -DDATABASE_MIGRATIONS="${CMAKE_CURRENT_SOURCE_DIR}/sql"
+)
+
+if(CMAKE_SYSTEM_NAME MATCHES Linux)
+    find_package(Threads REQUIRED)
+    target_link_libraries(${project_name}-lib INTERFACE Threads::Threads ${CMAKE_DL_LIBS})
+endif()
+
 
 ## add executables
 
-add_executable(${project_name}-exe
-        src/App.cpp
-)
+add_executable(${project_name}-exe src/App.cpp)
 target_link_libraries(${project_name}-exe ${project_name}-lib)
-add_dependencies(${project_name}-exe ${project_name}-lib)
-
-add_executable(${project_name}-test
-        test/tests.cpp
-        test/app/TestComponent.hpp
-        test/app/MyApiTestClient.hpp
-        test/MyControllerTest.cpp
-        test/MyControllerTest.hpp
-)
-target_link_libraries(${project_name}-test ${project_name}-lib)
-add_dependencies(${project_name}-test ${project_name}-lib)
-
-set_target_properties(${project_name}-lib ${project_name}-exe ${project_name}-test PROPERTIES
-        CXX_STANDARD 11
-        CXX_EXTENSIONS OFF
-        CXX_STANDARD_REQUIRED ON
-        LINKER_LANGUAGE CXX
-)
-
-enable_testing()
-add_test(project-tests ${project_name}-test)
+#
+#add_executable(${project_name}-test
+#        test/tests.cpp
+#        test/app/TestClient.hpp
+#        test/app/TestDatabaseComponent.hpp
+#        test/app/TestComponent.hpp
+#        test/UserControllerTest.hpp
+#        test/UserControllerTest.cpp)
+#target_link_libraries(${project_name}-test ${project_name}-lib)
+#enable_testing()
+#add_test(project-tests ${project_name}-test)
