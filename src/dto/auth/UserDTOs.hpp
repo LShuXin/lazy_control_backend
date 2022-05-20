@@ -81,7 +81,9 @@ class UserDto : public oatpp::DTO {
 
 
 class UsersPageDto : public PageDto<oatpp::Object<UserDto>> {
+
     DTO_INIT(UsersPageDto, PageDto<oatpp::Object<UserDto>>)
+
 };
 
 

@@ -28,9 +28,11 @@ public:
 
     QUERY(createUser,
          "INSERT INTO AppUser"
-         "(uid, email, role, username, password, nick, sex, birth, token, token_expire_stamp, status"
-         "(:user.uid, :user.email, :user.role, :user.username, :user.password, :user.nick, :user.sex, :user.birth, :user.token, :user.token_expire_stamp, :user.status;",
+         " (uid, email, role, username, password, nick, sex, birth, token, token_expire_stamp, status)"
+         " VALUES"
+         " (:user.uid, :user.email, :user.role, :user.username, :user.password, :user.nick, :user.sex, :user.birth, :user.token, :user.token_expire_stamp, :user.status);",
          PARAM(oatpp::Object<UserDto>, user))
+
 
     QUERY(updateUser,
           "UPDATE AppUser"
@@ -42,7 +44,7 @@ public:
           " password=:user.password,"
           " nick=:user.nick,"
           " sex=:user.sex,"
-          " birth=:user.birth, "
+          " birth=:user.birth,"
           " token=:user.token,"
           " token_expire_stamp=:user.token_expire_stamp,"
           " status=:user.status;",
@@ -52,7 +54,7 @@ public:
           "SELECT * FROM AppUser WHERE id=:id;",
           PARAM(oatpp::Int32, id))
 
-    QUERY(getUsers,
+    QUERY(getAllUsers,
           "SELECT * FROM AppUser LIMIT :limit OFFSET :offset;",
           PARAM(oatpp::UInt32, offset),
           PARAM(oatpp::UInt32, limit))

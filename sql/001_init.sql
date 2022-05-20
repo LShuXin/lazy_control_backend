@@ -3,19 +3,19 @@ CREATE TABLE AppUser (
   id INTEGET PRIMARY KEY,
   uid VARCHAR UNIQUE,
   email VARCHAR UNIQUE,
-  role CHAR,
+  role VARCHAR,
   username VARCHAR,
   password VARCHAR,
   nick VARCHAR,
-  sex CHAR,
+  sex VARCHAR,
   birth INTEGER,
   token VARCHAR,
-  token_expire_time INTEGER,
-  status CHAR
+  token_expire_stamp INTEGER,
+  status VARCHAR
 );
 
 INSERT INTO AppUser
-  (UID, EMAIL, ROLE, USERNAME, PASSWORD, NICK, SEX, BIRTH, TOKEN, TOKEN_EXPIRE_TIME, STATUS)
+  (uid, email, role, username, password, nick, sex, birth, token, token_expire_stamp, status)
   VALUES
   (
       10001,
@@ -26,8 +26,8 @@ INSERT INTO AppUser
       "Ds",
       "0",
       849369600,
-      "",
-      "0",
+      "token",
+      849369600,
       "1"
   );
 

@@ -5,16 +5,14 @@ project(${project_name})
 set(CMAKE_CXX_STANDARD 11)
 
 add_library(${project_name}-lib
-        src/controller/auth/LoginController.hpp
-        src/controller/auth/LoginController.cpp
+#        src/controller/auth/LoginController.hpp
+#        src/controller/auth/LoginController.cpp
         src/controller/auth/UserController.hpp
-        src/controller/auth/UserController.cpp
+#        src/controller/auth/UserController.cpp
         src/controller/StaticController.hpp
         src/db/UserDb.hpp
         src/dto/PageDTOs.hpp
         src/dto/StatusDTOs.hpp
-        src/dto/auth/AuthDTOs.hpp
-        src/dto/auth/UserDTOs.hpp
         src/service/user/UserService.hpp
         src/service/user/UserService.cpp
         src/AppComponent.hpp
@@ -81,14 +79,3 @@ endif()
 
 add_executable(${project_name}-exe src/App.cpp)
 target_link_libraries(${project_name}-exe ${project_name}-lib)
-#
-#add_executable(${project_name}-test
-#        test/tests.cpp
-#        test/app/TestClient.hpp
-#        test/app/TestDatabaseComponent.hpp
-#        test/app/TestComponent.hpp
-#        test/UserControllerTest.hpp
-#        test/UserControllerTest.cpp)
-#target_link_libraries(${project_name}-test ${project_name}-lib)
-#enable_testing()
-#add_test(project-tests ${project_name}-test)
