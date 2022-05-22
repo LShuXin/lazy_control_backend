@@ -1,6 +1,7 @@
+
 #include "AppComponent.hpp"
 
-#include "controller/auth/UserController.hpp"
+#include "controller/UserController.hpp"
 #include "controller/StaticController.hpp"
 
 #include "oatpp-swagger/Controller.hpp"

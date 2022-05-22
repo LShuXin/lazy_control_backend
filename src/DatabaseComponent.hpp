@@ -1,5 +1,6 @@
-#ifndef DATABASE_COMPONENT_HPP
-#define DATABASE_COMPONENT_HPP
+
+#ifndef LSX_BLOG_DATABASECOMPONENT_HPP
+#define LSX_BLOG_DATABASECOMPONENT_HPP
 
 #include "db/UserDb.hpp"
 
@@ -39,4 +40,4 @@ public:
 
 };
 
-#endif
+#endif //CRUD_DATABASECOMPONENT_HPP

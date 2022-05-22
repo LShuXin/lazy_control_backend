@@ -5,21 +5,19 @@ project(${project_name})
 set(CMAKE_CXX_STANDARD 11)
 
 add_library(${project_name}-lib
-#        src/controller/auth/LoginController.hpp
-#        src/controller/auth/LoginController.cpp
-        src/controller/auth/UserController.hpp
-#        src/controller/auth/UserController.cpp
         src/controller/StaticController.hpp
+        src/controller/UserController.hpp
         src/db/UserDb.hpp
-        src/dto/PageDTOs.hpp
-        src/dto/StatusDTOs.hpp
-        src/service/user/UserService.hpp
-        src/service/user/UserService.cpp
+        src/dto/PageDto.hpp
+        src/dto/StatusDto.hpp
+        src/dto/UserDto.hpp
+        src/service/UserService.cpp
+        src/service/UserService.hpp
         src/AppComponent.hpp
         src/DatabaseComponent.hpp
         src/SwaggerComponent.hpp
-        src/ErrorHandler.hpp
-        src/ErrorHandler.cpp)
+        src/ErrorHandler.cpp
+        src/ErrorHandler.hpp)
 
 ## include directories
 

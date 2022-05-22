@@ -1,10 +1,10 @@
 
-#ifndef CRUD_USERSERVICE_HPP
-#define CRUD_USERSERVICE_HPP
+#ifndef LSX_BLOG_USERSERVICE_HPP
+#define LSX_BLOG_USERSERVICE_HPP
 
 #include "db/UserDb.hpp"
-#include "dto/PageDTOs.hpp"
-#include "dto/StatusDTOs.hpp"
+#include "dto/PageDto.hpp"
+#include "dto/StatusDto.hpp"
 
 #include "oatpp/web/protocol/http/Http.hpp"
 #include "oatpp/core/macro/component.hpp"
