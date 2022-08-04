@@ -1,6 +1,5 @@
-
-#ifndef LSX_BLOG_USERSERVICE_HPP
-#define LSX_BLOG_USERSERVICE_HPP
+#ifndef USER_SERVICE_HPP
+#define USER_SERVICE_HPP
 
 #include "db/UserDb.hpp"
 #include "dto/PageDto.hpp"
@@ -12,16 +11,16 @@
 class UserService {
 private:
     typedef oatpp::web::protocol::http::Status Status;
-private:
-    OATPP_COMPONENT(std::shared_ptr<UserDb>, m_database); // Inject database component
-public:
 
+private:
+    OATPP_COMPONENT(std::shared_ptr<UserDb>, m_database);
+
+public:
     oatpp::Object<UserDto> createUser(const oatpp::Object<UserDto>& dto);
     oatpp::Object<UserDto> updateUser(const oatpp::Object<UserDto>& dto);
     oatpp::Object<UserDto> getUserById(const oatpp::Int32& id, const oatpp::provider::ResourceHandle<oatpp::orm::Connection>& connection = nullptr);
     oatpp::Object<PageDto<oatpp::Object<UserDto>>> getAllUsers(const oatpp::UInt32& offset, const oatpp::UInt32& limit);
     oatpp::Object<StatusDto> deleteUserById(const oatpp::Int32& id);
-
 };
 
-#endif //CRUD_USERSERVICE_HPP
+#endif

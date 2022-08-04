@@ -1,8 +1,8 @@
-
-#ifndef LSX_BLOG_PAGEDTO_HPP
-#define LSX_BLOG_PAGEDTO_HPP
+#ifndef PAGE_DTO_HPP
+#define PAGE_DTO_HPP
 
 #include "UserDto.hpp"
+#include "ConfigDto.hpp"
 
 #include OATPP_CODEGEN_BEGIN(DTO)
 
@@ -19,11 +19,13 @@ class PageDto : public oatpp::DTO {
 };
 
 class UsersPageDto : public PageDto<oatpp::Object<UserDto>> {
-
     DTO_INIT(UsersPageDto, PageDto<oatpp::Object<UserDto>>)
+};
 
+class ConfigsPageDto : public PageDto<oatpp::Object<ConfigDto>> {
+    DTO_INIT(ConfigsPageDto, PageDto<oatpp::Object<ConfigDto>>)
 };
 
 #include OATPP_CODEGEN_END(DTO)
 
-#endif //CRUD_PAGEDTO_HPP
+#endif

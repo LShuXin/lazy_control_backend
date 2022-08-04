@@ -1,6 +1,5 @@
-
-#ifndef SwaggerComponent_hpp
-#define SwaggerComponent_hpp
+#ifndef SWAGGER_COMPONENT_HPP
+#define SWAGGER_COMPONENT_HPP
 
 #include "oatpp-swagger/Model.hpp"
 #include "oatpp-swagger/Resources.hpp"
@@ -21,16 +20,16 @@ public:
         oatpp::swagger::DocumentInfo::Builder builder;
 
         builder
-                .setTitle("User entity service")
-                .setDescription("CRUD API Example project with swagger docs")
-                .setVersion("1.0")
-                .setContactName("Ivan Ovsyanochka")
-                .setContactUrl("https://oatpp.io/")
+            .setTitle("Lazy Control Api Document")
+            .setDescription("API 文档")
+            .setVersion("1.0")
+            .setContactName("liu shuxin")
+            .setContactUrl("https://www.bt.com")
 
-                .setLicenseName("Apache License, Version 2.0")
-                .setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0")
+            .setLicenseName("Apache License, Version 2.0")
+            .setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0")
 
-                .addServer("http://localhost:8000", "server on localhost");
+            .addServer("http://localhost:8000", "Apple");
 
         return builder.build();
 

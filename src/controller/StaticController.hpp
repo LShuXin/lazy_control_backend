@@ -1,4 +1,3 @@
-
 #ifndef STATIC_CONTROLLER_HPP
 #define STATIC_CONTROLLER_HPP
 
@@ -7,32 +6,32 @@
 #include "oatpp/core/macro/codegen.hpp"
 #include "oatpp/core/macro/component.hpp"
 
-#include OATPP_CODEGEN_BEGIN(ApiController) //<- Begin Codegen
+#include OATPP_CODEGEN_BEGIN(ApiController)
 
 class StaticController : public oatpp::web::server::api::ApiController {
 public:
     StaticController(const std::shared_ptr<ObjectMapper>& objectMapper)
-            : oatpp::web::server::api::ApiController(objectMapper)
+        : oatpp::web::server::api::ApiController(objectMapper)
     {}
 public:
 
     static std::shared_ptr<StaticController> createShared(
-            OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper) // Inject objectMapper component here as default parameter
-    ){
+        OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper)
+    ) {
         return std::make_shared<StaticController>(objectMapper);
     }
 
     ENDPOINT("GET", "/", root) {
         const char* html =
-                "<html lang='en'>"
-                "  <head>"
-                "    <meta charset=utf-8/>"
-                "  </head>"
-                "  <body>"
-                "    <p>Hello CRUD example project!</p>"
-                "    <a href='swagger/ui'>Checkout Swagger-UI page</a>"
-                "  </body>"
-                "</html>";
+        "<html lang='en'>"
+        "  <head>"
+        "    <meta charset=utf-8/>"
+        "  </head>"
+        "  <body>"
+        "    <p>Hello CRUD example project!</p>"
+        "    <a href='swagger/ui'>Checkout Swagger-UI page</a>"
+        "  </body>"
+        "</html>";
         auto response = createResponse(Status::CODE_200, html);
         response->putHeader(Header::CONTENT_TYPE, "text/html");
         return response;
@@ -40,6 +39,6 @@ public:
 
 };
 
-#include OATPP_CODEGEN_END(ApiController) //<- End Codegen
+#include OATPP_CODEGEN_END(ApiController)
 
-#endif //CRUD_STATICCONTROLLER_HPP
+#endif

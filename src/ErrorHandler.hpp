@@ -1,6 +1,5 @@
-
-#ifndef LSX_BLOG_ERRORHANDLER_HPP
-#define LSX_BLOG_ERRORHANDLER_HPP
+#ifndef ERROR_HANDLER_HPP
+#define ERROR_HANDLER_HPP
 
 #include "dto/StatusDto.hpp"
 
@@ -12,10 +11,11 @@ private:
     typedef oatpp::web::protocol::http::outgoing::Response OutgoingResponse;
     typedef oatpp::web::protocol::http::Status Status;
     typedef oatpp::web::protocol::http::outgoing::ResponseFactory ResponseFactory;
+
 private:
     std::shared_ptr<oatpp::data::mapping::ObjectMapper> m_objectMapper;
-public:
 
+public:
     ErrorHandler(const std::shared_ptr<oatpp::data::mapping::ObjectMapper>& objectMapper);
 
     std::shared_ptr<OutgoingResponse>
@@ -23,5 +23,4 @@ public:
 
 };
 
-
-#endif //CRUD_ERRORHANDLER_HPP
+#endif

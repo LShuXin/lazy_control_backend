@@ -1,8 +1,8 @@
-
-#ifndef LSX_BLOG_DATABASECOMPONENT_HPP
-#define LSX_BLOG_DATABASECOMPONENT_HPP
+#ifndef DATABASE_COMPONENT_HPP
+#define DATABASE_COMPONENT_HPP
 
 #include "db/UserDb.hpp"
+#include "db/ConfigDb.hpp"
 
 class DatabaseComponent {
 public:
@@ -19,12 +19,9 @@ public:
         return oatpp::sqlite::ConnectionPool::createShared(connectionProvider,
                                                            10 /* max-connections */,
                                                            std::chrono::seconds(5) /* connection TTL */);
-
     }());
 
-    /**
-     * Create database client
-     */
+
     OATPP_CREATE_COMPONENT(std::shared_ptr<UserDb>, userDb)([] {
 
         /* Get database ConnectionProvider component */
@@ -35,9 +32,21 @@ public:
 
         /* Create MyClient database client */
         return std::make_shared<UserDb>(executor);
+    }());
+
+    OATPP_CREATE_COMPONENT(std::shared_ptr<ConfigDb>, configDb)([] {
+
+        /* Get database ConnectionProvider component */
+        OATPP_COMPONENT(std::shared_ptr<oatpp::provider::Provider<oatpp::sqlite::Connection>>, connectionProvider);
+
+        /* Create database-specific Executor */
+        auto executor = std::make_shared<oatpp::sqlite::Executor>(connectionProvider);
+
+        /* Create MyClient database client */
+        return std::make_shared<ConfigDb>(executor);
 
     }());
 
 };
 
-#endif //CRUD_DATABASECOMPONENT_HPP
+#endif

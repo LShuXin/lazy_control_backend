@@ -1,16 +1,8 @@
 # lsx-blog
-基于 OAT++ 框架开发的个人博客系统
 
-A complete example of a "CRUD" service (UserService) built with Oat++.
-
-In this example:
-
-- How to create CRUD endpoint.
-- How to use [oatpp ORM](https://oatpp.io/docs/components/orm/#high-level-overview) - SQLite example.
-- How to document API with Swagger-UI and OpenApi 3.0.0.
+基于 OAT++ 框架开发的一套个人资源管理系统
 
 More about Oat++:
-
 - [Oat++ Website](https://oatpp.io/)
 - [Oat++ Github Repository](https://github.com/oatpp/oatpp)
 - [Get Started](https://oatpp.io/docs/start)
@@ -63,7 +55,7 @@ This project is using the following oatpp modules:
 $ mkdir build && cd build
 $ cmake ..
 $ make 
-$ ./lsx-blog-exe        # - run application.
+$ ./lazy-control-backend        # - run application.
 ```
 
 #### In Docker

@@ -1,6 +1,5 @@
-
-#ifndef UserController_hpp
-#define UserController_hpp
+#ifndef USER_CONTROLLER_HPP
+#define USER_CONTROLLER_HPP
 
 #include "service/UserService.hpp"
 
@@ -15,16 +14,15 @@
  */
 class UserController : public oatpp::web::server::api::ApiController {
 public:
-    UserController(OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper))
-            : oatpp::web::server::api::ApiController(objectMapper)
-    {}
+    UserController(
+        OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper)
+    ) : oatpp::web::server::api::ApiController(objectMapper) {}
 private:
-    UserService m_userService; // Create user service.
+    UserService m_userService;
 public:
-
     static std::shared_ptr<UserController> createShared(
-            OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper) // Inject objectMapper component here as default parameter
-    ){
+        OATPP_COMPONENT(std::shared_ptr<ObjectMapper>, objectMapper) // Inject objectMapper component here as default parameter
+    ) {
         return std::make_shared<UserController>(objectMapper);
     }
 
@@ -42,7 +40,6 @@ public:
     {
         return createDtoResponse(Status::CODE_200, m_userService.createUser(userDto));
     }
-
 
     ENDPOINT_INFO(putUser) {
         info->summary = "Update User by userId";

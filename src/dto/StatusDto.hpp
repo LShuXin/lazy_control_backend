@@ -1,6 +1,5 @@
-
-#ifndef LSX_BLOG_STATUSDTO_HPP
-#define LSX_BLOG_STATUSDTO_HPP
+#ifndef STATUS_DTO_HPP
+#define STATUS_DTO_HPP
 
 #include "oatpp/core/macro/codegen.hpp"
 #include "oatpp/core/Types.hpp"
@@ -30,4 +29,4 @@ class StatusDto : public oatpp::DTO {
 
 #include OATPP_CODEGEN_END(DTO)
 
-#endif //CRUD_STATUSDTO_HPP
+#endif

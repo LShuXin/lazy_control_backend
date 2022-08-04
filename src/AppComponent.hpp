@@ -1,6 +1,5 @@
-
-#ifndef AppComponent_hpp
-#define AppComponent_hpp
+#ifndef APP_COMPONENT_HPP
+#define APP_COMPONENT_HPP
 
 #include "SwaggerComponent.hpp"
 #include "DatabaseComponent.hpp"
