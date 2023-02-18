@@ -35,7 +35,7 @@ public:
         info->addResponse<Object<StatusDto>>(Status::CODE_404, "application/json");
         info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
     }
-    ENDPOINT("POST", "users", createUser,
+    ENDPOINT("POST", "/api/user", createUser,
              BODY_DTO(Object<UserDto>, userDto))
     {
         return createDtoResponse(Status::CODE_200, m_userService.createUser(userDto));
@@ -52,7 +52,7 @@ public:
 
         info->pathParams["userId"].description = "User Identifier";
     }
-    ENDPOINT("PUT", "users/{userId}", putUser,
+    ENDPOINT("PUT", "/api/user/{userId}", putUser,
              PATH(Int32, userId),
              BODY_DTO(Object<UserDto>, userDto))
     {
@@ -70,7 +70,7 @@ public:
 
         info->pathParams["userId"].description = "User Identifier";
     }
-    ENDPOINT("GET", "users/{userId}", getUserById,
+    ENDPOINT("GET", "/api/user/{userId}", getUserById,
              PATH(Int32, userId))
     {
         return createDtoResponse(Status::CODE_200, m_userService.getUserById(userId));
@@ -80,14 +80,14 @@ public:
     ENDPOINT_INFO(getUsers) {
         info->summary = "get all stored users";
 
-        info->addResponse<oatpp::Object<UsersPageDto>>(Status::CODE_200, "application/json");
+        info->addResponse<oatpp::Object<UserPageDto>>(Status::CODE_200, "application/json");
         info->addResponse<Object<StatusDto>>(Status::CODE_500, "application/json");
     }
-    ENDPOINT("GET", "users/offset/{offset}/limit/{limit}", getUsers,
+    ENDPOINT("GET", "/api/user/offset/{offset}/limit/{limit}", getUsers,
              PATH(UInt32, offset),
              PATH(UInt32, limit))
     {
-        return createDtoResponse(Status::CODE_200, m_userService.getAllUsers(offset, limit));
+        return createDtoResponse(Status::CODE_200, m_userService.getAllUser(offset, limit));
     }
 
 
@@ -99,7 +99,7 @@ public:
 
         info->pathParams["userId"].description = "User Identifier";
     }
-    ENDPOINT("DELETE", "users/{userId}", deleteUser,
+    ENDPOINT("DELETE", "/api/user/{userId}", deleteUser,
              PATH(Int32, userId))
     {
         return createDtoResponse(Status::CODE_200, m_userService.deleteUserById(userId));

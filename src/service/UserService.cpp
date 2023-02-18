@@ -26,19 +26,19 @@ oatpp::Object<UserDto> UserService::getUserById(const oatpp::Int32& id, const oa
     return result[0];
 }
 
-oatpp::Object<PageDto<oatpp::Object<UserDto>>> UserService::getAllUsers(const oatpp::UInt32& offset, const oatpp::UInt32& limit) {
+oatpp::Object<UserPageDto> UserService::getAllUser(const oatpp::UInt32& offset, const oatpp::UInt32& limit) {
     oatpp::UInt32 countToFetch = limit;
 
     if(limit > 10) {
         countToFetch = 10;
     }
 
-    auto dbResult = m_database->getAllUsers(offset, countToFetch);
+    auto dbResult = m_database->getAllUser(offset, countToFetch);
     OATPP_ASSERT_HTTP(dbResult->isSuccess(), Status::CODE_500, dbResult->getErrorMessage());
 
     auto items = dbResult->fetch<oatpp::Vector<oatpp::Object<UserDto>>>();
 
-    auto page = PageDto<oatpp::Object<UserDto>>::createShared();
+    auto page = UserPageDto::createShared();
     page->offset = offset;
     page->limit = countToFetch;
     page->count = items->size();

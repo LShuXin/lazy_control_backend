@@ -11,17 +11,19 @@ class StatusDto : public oatpp::DTO {
     DTO_INIT(StatusDto, DTO)
 
     DTO_FIELD_INFO(status) {
-        info->description = "Short status text";
+        info->description = "Sshort status text";
     }
     DTO_FIELD(String, status);
 
+
     DTO_FIELD_INFO(code) {
-        info->description = "Status code";
+        info->description = "status code";
     }
     DTO_FIELD(Int32, code);
 
+
     DTO_FIELD_INFO(message) {
-        info->description = "Verbose message";
+        info->description = "verbose message";
     }
     DTO_FIELD(String, message);
 

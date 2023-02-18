@@ -14,6 +14,7 @@ add_library(${project_name}-lib
             src/dto/StatusDto.hpp
             src/dto/UserDto.hpp
             src/dto/ConfigDto.hpp
+            src/dto/QueryParamsDto.hpp
             src/service/UserService.cpp
             src/service/UserService.hpp
             src/service/ConfigService.cpp
@@ -22,7 +23,12 @@ add_library(${project_name}-lib
             src/DatabaseComponent.hpp
             src/SwaggerComponent.hpp
             src/ErrorHandler.cpp
-            src/ErrorHandler.hpp)
+            src/ErrorHandler.hpp
+            src/utils/TimeUtils.hpp
+            src/utils/QueryParamsMatch.hpp
+            src/utils/UrlEncodeDecode.hpp
+            src/Filters.hpp
+            src/ConstVariables.hpp)
 
 ## include directories
 target_include_directories(${project_name}-lib PUBLIC src)

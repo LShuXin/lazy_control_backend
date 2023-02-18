@@ -51,7 +51,7 @@ public:
           "SELECT * FROM AppUser WHERE id=:id;",
           PARAM(oatpp::Int32, id))
 
-    QUERY(getAllUsers,
+    QUERY(getAllUser,
           "SELECT * FROM AppUser LIMIT :limit OFFSET :offset;",
           PARAM(oatpp::UInt32, offset),
           PARAM(oatpp::UInt32, limit))

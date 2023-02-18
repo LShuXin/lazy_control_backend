@@ -23,17 +23,72 @@ class UserDto : public oatpp::DTO {
 
     DTO_INIT(UserDto, DTO)
 
+
+    DTO_FIELD_INFO(id) {
+        info->description = "db user unique identifier";
+    }
     DTO_FIELD(Int32, id);
+
+
+    DTO_FIELD_INFO(uid) {
+        info->description = "user uniquer identifier";
+    }
     DTO_FIELD(String, uid);
+
+
+    DTO_FIELD_INFO(email) {
+        info->description = "user email";
+    }
     DTO_FIELD(String, email);
+
+    DTO_FIELD_INFO(role) {
+        info->description = "user role";
+    }
     DTO_FIELD(Enum<Role>::AsString, role);
+
+
+    DTO_FIELD_INFO(username) {
+        info->description = "username";
+    }
     DTO_FIELD(String, username);
+
+
+    DTO_FIELD_INFO(password) {
+      info->description = "user password in md5";
+    }
     DTO_FIELD(String, password);
+
+    DTO_FIELD_INFO(nick) {
+        info->description = "user nick";
+    }
     DTO_FIELD(String, nick);
+
+    DTO_FIELD_INFO(sex) {
+        info->description = "user sex";
+    }
+
+
     DTO_FIELD(Enum<Sex>::AsString, sex);
+
+
+    DTO_FIELD_INFO(birth) {
+        info->description = "user birth";
+    }
     DTO_FIELD(Int64, birth);
+
+    DTO_FIELD_INFO(token) {
+        info->description = "user token";
+    }
     DTO_FIELD(String, token);
+
+    DTO_FIELD_INFO(token_expire_stamp) {
+        info->description = "token expire time";
+    }
     DTO_FIELD(Int64, token_expire_stamp);
+
+    DTO_FIELD_INFO(status) {
+        info->description = "user status";
+    }
     DTO_FIELD(Enum<UserStatus>::AsString, status);
 };
 
