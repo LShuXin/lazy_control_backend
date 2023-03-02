@@ -27,6 +27,8 @@ add_library(${project_name}-lib
             src/utils/TimeUtils.hpp
             src/utils/QueryParamsMatch.hpp
             src/utils/UrlEncodeDecode.hpp
+            src/utils/DiffMatchPatch.hpp
+            src/utils/PatchGenerator.cpp
             src/Filters.hpp
             src/ConstVariables.hpp)
 

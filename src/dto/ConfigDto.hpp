@@ -85,6 +85,36 @@ class ConfigDetailDto : public oatpp::DTO {
     DTO_FIELD(UInt64 , create_stamp);
 };
 
+
+ENUM(ConfigPatchOrDetailDtoContentType, v_int32,
+     VALUE(CONFIG_PATCH, 0, "content直接就是配置内容，直接取出内容当作配置即可"),
+     VALUE(CONFIG_DETAIL, 1, "content是补丁，需要对客户端的部分进行打补丁从而生成完整的配置"))
+
+/// 配置或者配置补丁
+class ConfigPatchOrDetailDto : public oatpp::DTO {
+
+    DTO_INIT(ConfigPatchOrDetailDto, DTO)
+
+    DTO_FIELD_INFO(contentType) {
+        info->description = "content类型标识，如果是0就代表配置内容，1代表配置补丁";
+    }
+    DTO_FIELD(Enum<ConfigPatchOrDetailDtoContentType>::AsNumber, contentType);
+
+
+    DTO_FIELD_INFO(content) {
+        info->description = "补丁内容或者配置内容";
+    }
+    DTO_FIELD(String, content);
+
+
+    DTO_FIELD_INFO(config_version) {
+        info->description = "对应最新配置的版本";
+    }
+    DTO_FIELD(UInt32 , config_version);
+};
+
+
+
 #include OATPP_CODEGEN_END(DTO)
 
 #endif

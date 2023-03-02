@@ -70,6 +70,11 @@ public:
     oatpp::Object<ConfigDetailDto> updateAppConfigDetail(const oatpp::Object<ConfigDetailDto>& dto);
 
     /**
+     * 根据配置名和版本号获取配置
+     * */
+    oatpp::Object<ConfigDetailDto> getAppConfigDetailByNameVersion(const oatpp::String& configName, const oatpp::UInt32& version);
+
+    /**
      * 根据配置名和配置版本号获取配置补丁，常用
      *
      * 具体过程是：
@@ -78,7 +83,7 @@ public:
      *   3. 如果版本号大于0，则使用diff_match_patch算法计算数据库内该配置的最新版本和传入的版本之间的diff，将diff作为patch字段传入
      *   4. 前端通过diff计算新的配置或者直接存储完整配置
      * */
-    oatpp::Object<ConfigDetailDto> getAppConfigDetailPatch(const oatpp::String &configName, const oatpp::UInt32& configVersion, const oatpp::provider::ResourceHandle<oatpp::orm::Connection>& connection = nullptr);
+    oatpp::Object<ConfigPatchOrDetailDto> getAppConfigDetailPatch(const oatpp::String &configName, const oatpp::UInt32& configVersion, const oatpp::provider::ResourceHandle<oatpp::orm::Connection>& connection = nullptr);
 
 
 };

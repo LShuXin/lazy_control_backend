@@ -5,6 +5,6 @@
 #ifndef LAZY_CONTROL_BACKEND_CONSTVARIABLES_H
 #define LAZY_CONTROL_BACKEND_CONSTVARIABLES_H
 
-std::string INFO_TAG = "LAZY_CONTROL_INFO:";
+oatpp::base::LogCategory INFO_TAG = (const oatpp::base::LogCategory &) "LAZY_CONTROL_INFO:";
 
 #endif //LAZY_CONTROL_BACKEND_CONSTVARIABLES_H

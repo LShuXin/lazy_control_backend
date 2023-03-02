@@ -1,4 +1,7 @@
 #include "ConfigService.hpp"
+#include "utils/DiffMatchPatch.hpp"
+#include "utils/PatchGenerator.cpp"
+#include "dto/ConfigDto.hpp"
 
 oatpp::Object<ConfigItemDto> ConfigService::createAppConfigItem(const oatpp::Object<ConfigItemDto>& dto)
 {
@@ -142,9 +145,39 @@ oatpp::Object<ConfigDetailDto> ConfigService::getLatestAppConfigDetail(const oat
     return items[0];
 }
 
-oatpp::Object<ConfigDetailDto> ConfigService::getAppConfigDetailPatch(const oatpp::String &configName, const oatpp::UInt32 &configVersion, const oatpp::provider::ResourceHandle<oatpp::orm::Connection> &connection) {
-    return oatpp::Object<ConfigDetailDto>();
+
+oatpp::Object<ConfigDetailDto> ConfigService::getAppConfigDetailByNameVersion(const oatpp::String &configName, const oatpp::UInt32 &version) {
+    auto detailDbResult = m_database->getAppConfigDetailByConfigNameAndConfigVersion(configName, version);
+    OATPP_ASSERT_HTTP(detailDbResult->isSuccess(), Status::CODE_500, detailDbResult->getErrorMessage());
+    auto items = detailDbResult->fetch<oatpp::Vector<oatpp::Object<ConfigDetailDto>>>();
+
+    return items[0];
 }
+
+
+/// 根据传过来的配置版本号以及配置名称生成配置补丁
+/// 版本号为1及以下时认为客户端没有配置，直接返回配置内容
+oatpp::Object<ConfigPatchOrDetailDto> ConfigService::getAppConfigDetailPatch(const oatpp::String &configName, const oatpp::UInt32 &configVersion, const oatpp::provider::ResourceHandle<oatpp::orm::Connection> &connection) {
+    oatpp::Object<ConfigDetailDto> latestConfigDetail = getLatestAppConfigDetail(configName);
+
+    oatpp::Object<ConfigPatchOrDetailDto> configPatchOrDetail = oatpp::Object<ConfigPatchOrDetailDto>::createShared();
+    configPatchOrDetail->contentType = 1 >= configVersion ? ConfigPatchOrDetailDtoContentType::CONFIG_DETAIL : ConfigPatchOrDetailDtoContentType::CONFIG_PATCH;
+    configPatchOrDetail->config_version = latestConfigDetail->config_version;
+
+    if (configPatchOrDetail->contentType == ConfigPatchOrDetailDtoContentType::CONFIG_DETAIL) {
+        configPatchOrDetail->content = latestConfigDetail->content;
+        return configPatchOrDetail;
+    }
+
+
+    oatpp::Object<ConfigDetailDto> clientConfigDetail = getAppConfigDetailByNameVersion(configName, configVersion);
+    PatchGenerator patchGenerator;
+
+    configPatchOrDetail->content = patchGenerator.generatePatch(clientConfigDetail->content, latestConfigDetail->content);
+
+    return configPatchOrDetail;
+}
+
 
 //oatpp::Object<ConfigDto> ConfigService::getPatch(const oatpp::String &configName, const oatpp::UInt32 &configVersion,
 //                                                 const oatpp::provider::ResourceHandle<oatpp::orm::Connection> &connection) {
