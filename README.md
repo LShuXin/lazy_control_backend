@@ -1,6 +1,6 @@
-# lsx-blog
+# lazy_control_backend
 
-基于 OAT++ 框架开发的一套个人资源管理系统
+基于 OAT++ 开发的个人竞技场后端支持项目
 
 More about Oat++:
 - [Oat++ Website](https://oatpp.io/)
@@ -61,8 +61,11 @@ $ ./lazy-control-backend        # - run application.
 #### In Docker
 
 ```
-$ docker build -t example-crud .
-$ docker run -p 8000:8000 -t example-crud
+$ docker build -t lazy_control_backend:latest .
+$ docker run -p 8000:8000 -t lazy_control_backend:latest
+
+$ docker tag lazy_control_backend:latest 1569663570/lazy_control_backend:latest
+$ docker push 1569663570/lazy_control_backend:latest
 ```
 
 ---
