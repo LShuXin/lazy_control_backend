@@ -1,6 +1,6 @@
 # lazy_control_backend
 
-基于 OAT++ 开发的个人竞技场后端支持项目
+基于 OAT++ 开发的竞技场后端支持项目
 
 More about Oat++:
 - [Oat++ Website](https://oatpp.io/)
